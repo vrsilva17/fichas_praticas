@@ -55,3 +55,7 @@ print(Jogador(jogador2,token2))
 print(Tabuleiro(token1))
 print(Tabuleiro(token2))
 
+teste = Tabuleiro()
+teste.MostrarTabuleiro()
+
+
