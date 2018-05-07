@@ -1,7 +1,6 @@
 ##Variaveis globais
 jogador_valido = False
 num_max_jogadas = 0
-winner = None
 
 ##Class Jogador
 class jogador():
@@ -26,7 +25,7 @@ class tabuleiro():
                            [None, None, None] ]
 
     def __str__(self):
-        teste = "\n  A|B|C"
+        teste = "\n A|B|C"
         for i in range (0, 3):
             teste += "\n" + str(i+1) + "|"
             for j in range (0, 3):
@@ -35,8 +34,8 @@ class tabuleiro():
                 else:
                     teste += self.tabuleiro[j][i] + "|"
         return teste
-    
-    def validarjogada(self,jogada,token):        
+
+    def validarjogada(self,jogada,token):
         if (jogada[0] == "A" or jogada[0] == "B" or jogada[0] == "C") and (jogada[1] == "1" or jogada[1] == "2" or jogada[1] == "3"):
             if jogada[0] == "A":
                 coluna = 0
@@ -69,21 +68,6 @@ class tabuleiro():
             print("Jogada Inválida!!")
             jogada = input("Jogue entre (A1-C3):  ")
 
-    def vitoria(self,nome,token):
-        if  (self.tabuleiro[0][0] == token and self.tabuleiro[0][1] == token and self.tabuleiro[0][2] == token) or \
-            (self.tabuleiro[1][0] == token and self.tabuleiro[1][1] == token and self.tabuleiro[1][2] == token) or \
-            (self.tabuleiro[2][0] == token and self.tabuleiro[2][1] == token and self.tabuleiro[2][2] == token) or \
-            (self.tabuleiro[0][0] == token and self.tabuleiro[1][0] == token and self.tabuleiro[2][0] == token) or \
-            (self.tabuleiro[1][0] == token and self.tabuleiro[1][1] == token and self.tabuleiro[1][2] == token) or \
-            (self.tabuleiro[2][0] == token and self.tabuleiro[2][1] == token and self.tabuleiro[2][2] == token) or \
-            (self.tabuleiro[0][0] == token and self.tabuleiro[1][1] == token and self.tabuleiro[2][2] == token) or \
-            (self.tabuleiro[2][0] == token and self.tabuleiro[1][1] == token and self.tabuleiro[0][2] == token):
-            winner = True
-            return winner
-        #else:
-            #print("Empate!!")
-        
-
 
 ##Introducao de dados
 ##Jogador 1
@@ -101,22 +85,11 @@ jogador1.validarjogador()
 tabuleiro1.__str__()
 
 #Jogar
-while num_max_jogadas < 9:
-    jogada = input("[{}] Onde pretende jogar: ".format(jogador1.nome))
+while num_max_jogadas <= 9:
+    jogada = input("[Jogador 1] Onde pretende jogar:  ")
     tabuleiro1.validarjogada(jogada,jogador1.token)
     print(tabuleiro1)
-    tabuleiro1.vitoria(jogador1.nome,jogador1.token)
-    if winner == True:
-        print("O vencedor é o: ",jogador1.nome)
-        break
-    jogada = input("[{}] Onde pretende jogar: ".format(jogador2.nome))
+    jogada = input("[Jogador 2] Onde pretende jogar: ")
     tabuleiro1.validarjogada(jogada,jogador2.token)
     print(tabuleiro1)
-    tabuleiro1.vitoria(jogador2.nome,jogador2.token)
-    if winner == True:
-        print("O vencedor é o: ",jogador2.nome)
-        break
     num_max_jogadas += 1
-
-if num_max_jogadas == 9:
-        print("empate")
