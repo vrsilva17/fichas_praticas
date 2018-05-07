@@ -67,6 +67,7 @@ class tabuleiro():
         else:
             print("Jogada Inválida!!")
             jogada = input("Jogue entre (A1-C3):  ")
+            self.validarjogada(jogada,token)
 
     def vitoria(self,nome,token):
         if  (self.tabuleiro[0][0] == token and self.tabuleiro[0][1] == token and self.tabuleiro[0][2] == token) or \
@@ -80,7 +81,7 @@ class tabuleiro():
             global winner
             winner = True
         return winner
-       
+    
 ##Introducao de dados
 ##Jogador 1
 jogador1 = jogador()
@@ -99,7 +100,10 @@ tabuleiro1.__str__()
 #Jogar
 winner = False
 while num_max_jogadas < 9:
-    jogada = input("[{}] Onde pretende jogar: ".format(jogador1.nome))
+    jogada = input("[{}] Onde pretende jogar:\n Se pretender desistir clique X:   ".format(jogador1.nome))
+    if jogada == "X":
+        print("O jogador {} desistiu \n O jogador {} é o vencedor ".format(jogador1.nome,jogador2.nome))
+        break
     tabuleiro1.validarjogada(jogada,jogador1.token)
     print(tabuleiro1)
     tabuleiro1.vitoria(jogador1.nome,jogador1.token)
@@ -111,6 +115,9 @@ while num_max_jogadas < 9:
         print("Empate")
         break
     jogada = input("[{}] Onde pretende jogar: ".format(jogador2.nome))
+    if jogada == "X":
+        print("O jogador {} desistiu \n O jogador {} é o vencedor ".format(jogador2.nome,jogador1.nome))
+        break
     tabuleiro1.validarjogada(jogada,jogador2.token)
     print(tabuleiro1)
     tabuleiro1.vitoria(jogador2.nome,jogador2.token)
