@@ -1,5 +1,4 @@
 ##Variaveis globais
-jogador_valido = False
 num_max_jogadas = 0
 
 ##Class Jogador
@@ -24,6 +23,7 @@ class tabuleiro():
                            [None, None, None], 
                            [None, None, None] ]
 
+    #Tabuleiro 
     def __str__(self):
         teste = "\n  A|B|C"
         for j in range (0, 3):
@@ -35,6 +35,7 @@ class tabuleiro():
                     teste += self.tabuleiro[j][i] + "|"
         return teste
     
+    # Validar as jogadas (codigo base de um colega) 
     def validarjogada(self,jogada,token):        
         if (jogada[0] == "A" or jogada[0] == "B" or jogada[0] == "C") and (jogada[1] == "1" or jogada[1] == "2" or jogada[1] == "3"):
             if jogada[0] == "A":
@@ -43,8 +44,8 @@ class tabuleiro():
                 if self.tabuleiro[linha][coluna] == None:
                     self.tabuleiro[linha][coluna] = token
                 else:
-                    print("Jogada Inválida!!")
-                    jogada = input("Jogue entre (A1-C3): ")
+                    print("Posição já ocupada, jogue em um espaço vazio!")
+                    jogada = input("Jogada: ")
                     self.validarjogada(jogada,token)
             if jogada[0] == "B":
                 coluna = 1
@@ -52,8 +53,8 @@ class tabuleiro():
                 if self.tabuleiro[linha][coluna] == None:
                     self.tabuleiro[linha][coluna] = token
                 else:
-                    print("Jogada Inválida!!")
-                    jogada = input("Jogue entre (A1-C3): ")
+                    print("Posição já ocupada, jogue em um espaço vazio!")
+                    jogada = input("Jogada: ")
                     self.validarjogada(jogada,token)
             if jogada[0] == "C":
                 coluna = 2
@@ -61,14 +62,15 @@ class tabuleiro():
                 if self.tabuleiro[linha][coluna] == None:
                     self.tabuleiro[linha][coluna] = token
                 else:
-                    print("Jogada Inválida!!")
-                    jogada = input("Jogue entre (A1-C3):")
+                    print("Posição já ocupada, jogue em um espaço vazio!")
+                    jogada = input("Jogada: ")
                     self.validarjogada(jogada,token)
         else:
             print("Jogada Inválida!!")
             jogada = input("Jogue entre (A1-C3):  ")
             self.validarjogada(jogada,token)
 
+    #Verificar vencedor (Codigo com base no trabalho de um colega)
     def vitoria(self,nome,token):
         if  (self.tabuleiro[0][0] == token and self.tabuleiro[0][1] == token and self.tabuleiro[0][2] == token) or \
             (self.tabuleiro[1][0] == token and self.tabuleiro[1][1] == token and self.tabuleiro[1][2] == token) or \
@@ -95,12 +97,12 @@ jogador2.token = input("[Jogador 2] Token que prente usar: ")
 ##Tabuleiro
 tabuleiro1 = tabuleiro()
 jogador1.validarjogador()    
-tabuleiro1.__str__()
+print(tabuleiro1)
 
-#Jogar
+#Jogar 
 winner = False
 while num_max_jogadas < 9:
-    jogada = input("[{}] Onde pretende jogar:\n Se pretender desistir clique X:   ".format(jogador1.nome))
+    jogada = input("[{}] Jogue entre (A1-C3)\n Se pretender desistir clique X:   ".format(jogador1.nome))
     if jogada == "X":
         print("O jogador {} desistiu \n O jogador {} é o vencedor ".format(jogador1.nome,jogador2.nome))
         break
@@ -114,7 +116,7 @@ while num_max_jogadas < 9:
     if num_max_jogadas == 9:
         print("Empate")
         break
-    jogada = input("[{}] Onde pretende jogar: ".format(jogador2.nome))
+    jogada = input("[{}] Jogue entre (A1-C3)\n Se pretender desistir clique X:   ".format(jogador2.nome))
     if jogada == "X":
         print("O jogador {} desistiu \n O jogador {} é o vencedor ".format(jogador2.nome,jogador1.nome))
         break
